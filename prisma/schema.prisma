@@ -1,0 +1,97 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "cockroachdb"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id       String @id @default(cuid())
+  email    String @unique
+  name     String?
+  password String
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  // Relations
+  tugas      Tugas[]
+  kategoris  Kategori[]
+  
+  @@map("users")
+}
+
+model Kategori {
+  id     String @id @default(cuid())
+  nama   String
+  warna  String @default("#3B82F6") // Default blue color
+  icon   String @default("📝")
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  // Relations
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  tugas  Tugas[]
+  
+  @@map("kategori")
+}
+
+model Tugas {
+  id          String      @id @default(cuid())
+  judul       String
+  deskripsi   String?
+  status      StatusTugas @default(PENDING)
+  prioritas   Prioritas   @default(MEDIUM)
+  estimasiWaktu Int?      // dalam menit
+  waktuSelesai  Int?      // waktu aktual dalam menit
+  deadline    DateTime?
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  completedAt DateTime?
+  
+  // Relations
+  userId     String
+  user       User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  kategoriId String
+  kategori   Kategori  @relation(fields: [kategoriId], references: [id], onDelete: Cascade)
+  
+  riwayat RiwayatTugas?
+  
+  @@map("tugas")
+}
+
+model RiwayatTugas {
+  id        String   @id @default(cuid())
+  tugasId   String   @unique
+  tugas     Tugas    @relation(fields: [tugasId], references: [id], onDelete: Cascade)
+  
+  waktuMulai    DateTime
+  waktuSelesai  DateTime
+  catatanTambahan String?
+  
+  createdAt DateTime @default(now())
+  
+  @@map("riwayat_tugas")
+}
+
+enum StatusTugas {
+  PENDING
+  IN_PROGRESS
+  COMPLETED
+  CANCELLED
+}
+
+enum Prioritas {
+  LOW
+  MEDIUM
+  HIGH
+  URGENT
+}
