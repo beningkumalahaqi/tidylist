@@ -1,8 +1,3 @@
-Berikut adalah isi lengkap dari `README.md` untuk proyek **TidyList** dalam format Markdown. Kamu bisa langsung salin ke file `README.md` di root project Next.js kamu.
-
----
-
-```markdown
 # 🧹 TidyList – Minimalist Time-Tracking To-Do Web App
 
 TidyList adalah aplikasi to-do list berbasis web yang berfokus pada **manajemen tugas personal** dengan pendekatan **desain minimalis dan visualisasi waktu**. Aplikasi ini memungkinkan pengguna untuk mencatat tugas-tugas harian berdasarkan kategori (belajar, kerja, olahraga, dll), serta melihat **grafik mingguan** tentang bagaimana waktu mereka digunakan.
