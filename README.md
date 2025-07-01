@@ -17,7 +17,7 @@ TidyList adalah aplikasi to-do list berbasis web yang berfokus pada **manajemen 
 |---------------------|--------------------------------------------------------------------------|
 | ✅ To-Do List        | Tambah, ubah, hapus, dan kategorikan tugas harian                        |
 | 📊 Visualisasi Waktu| Pie/bar chart mingguan penggunaan waktu berdasarkan kategori             |
-| 🔔 Reminder         | Pengingat tugas (opsional)                                               |
+| 🔔 Reminder         | Pengingat tugas                                               |
 | 📅 Riwayat          | Lihat dan lacak tugas yang telah diselesaikan                            |
 | 🎨 Kustomisasi      | Dark mode, kategori fleksibel, urutan tugas bisa diubah                  |
 | ☁️ Cloud Sync       | Akses data dari berbagai perangkat (akun login)                          |
