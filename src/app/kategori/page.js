@@ -164,6 +164,7 @@ export default function KategoriPage() {
                 setShowModal(true)
               }}
               className="flex items-center space-x-2"
+              aria-label="Tambah Kategori"
             >
               <Plus className="h-4 w-4" />
               <span className="hidden sm:inline">Tambah Kategori</span>
