@@ -3,12 +3,13 @@
 import { useState, useEffect } from 'react'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
-import { useForm } from 'react-hook-form'
+import { useForm, Controller } from 'react-hook-form'
 import toast from 'react-hot-toast'
 import Navigation from '../../components/Navigation'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../../components/ui/card'
 import { Button } from '../../components/ui/button'
 import { Input } from '../../components/ui/input'
+import { DateTimePicker } from '../../components/ui/date-time-picker'
 import { formatDuration } from '../../lib/utils'
 import { 
   Plus, 
@@ -32,7 +33,7 @@ export default function TugasPage() {
   const [editingTugas, setEditingTugas] = useState(null)
   const [filterStatus, setFilterStatus] = useState('all')
   
-  const { register, handleSubmit, formState: { errors }, reset, setValue } = useForm()
+  const { register, handleSubmit, formState: { errors }, reset, setValue, control } = useForm()
 
   useEffect(() => {
     if (status === 'loading') return
@@ -146,7 +147,7 @@ export default function TugasPage() {
     setValue('kategoriId', tugasItem.kategoriId)
     setValue('prioritas', tugasItem.prioritas)
     setValue('estimasiWaktu', tugasItem.estimasiWaktu || '')
-    setValue('deadline', tugasItem.deadline ? new Date(tugasItem.deadline).toISOString().slice(0, 16) : '')
+    setValue('deadline', tugasItem.deadline ? tugasItem.deadline : '')
     setShowModal(true)
   }
 
@@ -387,8 +388,8 @@ export default function TugasPage() {
 
       {/* Modal */}
       {showModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-2 sm:p-4 z-50">
-          <div className="bg-white rounded-lg p-4 sm:p-6 w-full max-w-md max-h-[90vh] overflow-y-auto">
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-2 sm:p-4 z-30">
+          <div className="bg-white rounded-lg p-4 sm:p-6 w-full max-w-md max-h-[95vh] overflow-y-auto">
             <h2 className="text-lg sm:text-xl font-bold mb-3 sm:mb-4">
               {editingTugas ? 'Edit Tugas' : 'Tambah Tugas Baru'}
             </h2>
@@ -477,11 +478,17 @@ export default function TugasPage() {
                 <label htmlFor="deadline" className="block text-xs sm:text-sm font-medium text-gray-700 mb-1">
                   Deadline
                 </label>
-                <Input
-                  id="deadline"
-                  type="datetime-local"
-                  {...register('deadline')}
-                  className="text-sm"
+                <Controller
+                  name="deadline"
+                  control={control}
+                  render={({ field }) => (
+                    <DateTimePicker
+                      id="deadline"
+                      value={field.value}
+                      onChange={field.onChange}
+                      className="text-sm"
+                    />
+                  )}
                 />
               </div>
 
