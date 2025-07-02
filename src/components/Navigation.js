@@ -53,6 +53,7 @@ export default function Navigation() {
           {/* Mobile hamburger button */}
           <div className="flex items-center sm:hidden">
             <button
+              type="button"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               aria-label={isMobileMenuOpen ? "Close navigation" : "Open navigation"}
               className="inline-flex items-center justify-center p-2 rounded-md text-gray-500 hover:text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-700"
