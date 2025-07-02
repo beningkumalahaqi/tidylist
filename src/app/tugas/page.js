@@ -207,6 +207,7 @@ export default function TugasPage() {
                 setShowModal(true)
               }}
               className="flex items-center space-x-2"
+              aria-label="Tambah Tugas"
             >
               <Plus className="h-4 w-4" />
               <span className="hidden sm:inline">Tambah Tugas</span>
