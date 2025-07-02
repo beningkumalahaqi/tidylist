@@ -195,10 +195,10 @@ export default function TugasPage() {
       
       <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
         <div className="px-4 py-6 sm:px-0">
-          <div className="flex justify-between items-center mb-8">
+          <div className="flex justify-between items-center mb-6 sm:mb-8">
             <div>
-              <h1 className="text-3xl font-bold text-gray-900">Manajemen Tugas</h1>
-              <p className="mt-2 text-gray-600">Kelola dan lacak semua tugas Anda</p>
+              <h1 className="text-xl sm:text-3xl font-bold text-gray-900">Manajemen Tugas</h1>
+              <p className="mt-1 sm:mt-2 text-sm sm:text-base text-gray-600">Kelola dan lacak semua tugas Anda</p>
             </div>
             <Button 
               onClick={() => {
@@ -209,16 +209,16 @@ export default function TugasPage() {
               className="flex items-center space-x-2"
             >
               <Plus className="h-4 w-4" />
-              <span>Tambah Tugas</span>
+              <span className="hidden sm:inline">Tambah Tugas</span>
             </Button>
           </div>
 
           {/* Filter */}
-          <div className="mb-6">
-            <div className="flex space-x-4">
+          <div className="mb-4 sm:mb-6">
+            <div className="flex space-x-2 sm:space-x-4">
               <button
                 onClick={() => setFilterStatus('all')}
-                className={`px-4 py-2 rounded-md text-sm font-medium ${
+                className={`px-2 sm:px-4 py-1 sm:py-2 rounded-md text-xs sm:text-sm font-medium ${
                   filterStatus === 'all' 
                     ? 'bg-blue-100 text-blue-700' 
                     : 'text-gray-500 hover:text-gray-700'
@@ -228,17 +228,18 @@ export default function TugasPage() {
               </button>
               <button
                 onClick={() => setFilterStatus('pending')}
-                className={`px-4 py-2 rounded-md text-sm font-medium ${
+                className={`px-2 sm:px-4 py-1 sm:py-2 rounded-md text-xs sm:text-sm font-medium ${
                   filterStatus === 'pending' 
                     ? 'bg-yellow-100 text-yellow-700' 
                     : 'text-gray-500 hover:text-gray-700'
                 }`}
               >
-                Belum Selesai ({tugas.filter(t => t.status !== 'COMPLETED').length})
+                <span className="hidden sm:inline">Belum Selesai</span>
+                <span className="sm:hidden">Pending</span> ({tugas.filter(t => t.status !== 'COMPLETED').length})
               </button>
               <button
                 onClick={() => setFilterStatus('completed')}
-                className={`px-4 py-2 rounded-md text-sm font-medium ${
+                className={`px-2 sm:px-4 py-1 sm:py-2 rounded-md text-xs sm:text-sm font-medium ${
                   filterStatus === 'completed' 
                     ? 'bg-green-100 text-green-700' 
                     : 'text-gray-500 hover:text-gray-700'
@@ -251,17 +252,17 @@ export default function TugasPage() {
 
           {/* Tasks Grid */}
           {filteredTugas.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
               {filteredTugas.map((task) => (
                 <Card key={task.id} className="hover:shadow-lg transition-shadow">
-                  <CardHeader className="pb-3">
+                  <CardHeader className="pb-2 sm:pb-3">
                     <div className="flex justify-between items-start">
                       <div className="flex-1">
-                        <CardTitle className="text-lg">{task.judul}</CardTitle>
-                        <div className="flex items-center space-x-2 mt-2">
+                        <CardTitle className="text-base sm:text-lg">{task.judul}</CardTitle>
+                        <div className="flex items-center space-x-2 mt-1 sm:mt-2">
                           {getStatusIcon(task.status)}
                           <span 
-                            className="inline-block px-2 py-1 rounded-full text-xs font-medium"
+                            className="inline-block px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full text-xs font-medium"
                             style={{ backgroundColor: task.kategori.warna + '20', color: task.kategori.warna }}
                           >
                             {task.kategori.icon} {task.kategori.nama}
@@ -273,24 +274,24 @@ export default function TugasPage() {
                           onClick={() => openEditModal(task)}
                           className="p-1 hover:bg-gray-100 rounded"
                         >
-                          <Edit className="h-4 w-4 text-gray-500" />
+                          <Edit className="h-3 w-3 sm:h-4 sm:w-4 text-gray-500" />
                         </button>
                         <button
                           onClick={() => deleteTugas(task.id)}
                           className="p-1 hover:bg-gray-100 rounded"
                         >
-                          <Trash2 className="h-4 w-4 text-red-500" />
+                          <Trash2 className="h-3 w-3 sm:h-4 sm:w-4 text-red-500" />
                         </button>
                       </div>
                     </div>
                   </CardHeader>
                   <CardContent>
                     {task.deskripsi && (
-                      <p className="text-gray-600 text-sm mb-3">{task.deskripsi}</p>
+                      <p className="text-gray-600 text-xs sm:text-sm mb-2 sm:mb-3">{task.deskripsi}</p>
                     )}
                     
-                    <div className="space-y-2">
-                      <div className="flex justify-between items-center text-sm">
+                    <div className="space-y-1 sm:space-y-2">
+                      <div className="flex justify-between items-center text-xs sm:text-sm">
                         <span className="text-gray-500">Prioritas</span>
                         <span className={`font-medium ${getPriorityColor(task.prioritas)}`}>
                           {task.prioritas}
@@ -298,21 +299,21 @@ export default function TugasPage() {
                       </div>
                       
                       {task.estimasiWaktu && (
-                        <div className="flex justify-between items-center text-sm">
+                        <div className="flex justify-between items-center text-xs sm:text-sm">
                           <span className="text-gray-500">Estimasi</span>
                           <span>{formatDuration(task.estimasiWaktu)}</span>
                         </div>
                       )}
                       
                       {task.waktuSelesai && (
-                        <div className="flex justify-between items-center text-sm">
+                        <div className="flex justify-between items-center text-xs sm:text-sm">
                           <span className="text-gray-500">Waktu Selesai</span>
                           <span className="text-green-600">{formatDuration(task.waktuSelesai)}</span>
                         </div>
                       )}
                       
                       {task.deadline && (
-                        <div className="flex justify-between items-center text-sm">
+                        <div className="flex justify-between items-center text-xs sm:text-sm">
                           <span className="text-gray-500">Deadline</span>
                           <span>{new Date(task.deadline).toLocaleDateString('id-ID')}</span>
                         </div>
@@ -320,13 +321,13 @@ export default function TugasPage() {
                     </div>
 
                     {task.status !== 'COMPLETED' && (
-                      <div className="mt-4 pt-4 border-t flex space-x-2">
+                      <div className="mt-3 sm:mt-4 pt-3 sm:pt-4 border-t flex space-x-2">
                         {task.status === 'PENDING' && (
                           <Button
                             size="sm"
                             variant="outline"
                             onClick={() => updateTugasStatus(task.id, 'IN_PROGRESS')}
-                            className="flex-1"
+                            className="flex-1 text-xs sm:text-sm"
                           >
                             <Play className="h-3 w-3 mr-1" />
                             Mulai
@@ -343,7 +344,7 @@ export default function TugasPage() {
                                 updateTugasStatus(task.id, 'COMPLETED', parseInt(waktu))
                               }
                             }}
-                            className="flex-1"
+                            className="flex-1 text-xs sm:text-sm"
                           >
                             <CheckCircle className="h-3 w-3 mr-1" />
                             Selesai
@@ -357,22 +358,23 @@ export default function TugasPage() {
             </div>
           ) : (
             <Card>
-              <CardContent className="py-12">
+              <CardContent className="py-8 sm:py-12">
                 <div className="text-center">
-                  <CheckCircle className="h-12 w-12 text-gray-400 mx-auto mb-4" />
-                  <h3 className="text-lg font-medium text-gray-900 mb-2">
+                  <CheckCircle className="h-10 w-10 sm:h-12 sm:w-12 text-gray-400 mx-auto mb-3 sm:mb-4" />
+                  <h3 className="text-base sm:text-lg font-medium text-gray-900 mb-2">
                     {filterStatus === 'all' ? 'Belum Ada Tugas' : 'Tidak Ada Tugas'}
                   </h3>
-                  <p className="text-gray-600 mb-4">
+                  <p className="text-sm sm:text-base text-gray-600 mb-3 sm:mb-4">
                     {filterStatus === 'all' 
                       ? 'Mulai dengan membuat tugas pertama Anda'
                       : `Tidak ada tugas dengan filter ${filterStatus === 'completed' ? 'selesai' : 'belum selesai'}`
                     }
                   </p>
                   {filterStatus === 'all' && (
-                    <Button onClick={() => setShowModal(true)}>
+                    <Button onClick={() => setShowModal(true)} className="text-sm">
                       <Plus className="h-4 w-4 mr-2" />
-                      Tambah Tugas
+                      <span className="hidden sm:inline">Tambah Tugas</span>
+                      <span className="sm:hidden">Tambah</span>
                     </Button>
                   )}
                 </div>
@@ -384,48 +386,49 @@ export default function TugasPage() {
 
       {/* Modal */}
       {showModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-          <div className="bg-white rounded-lg p-6 w-full max-w-md max-h-[90vh] overflow-y-auto">
-            <h2 className="text-xl font-bold mb-4">
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-2 sm:p-4 z-50">
+          <div className="bg-white rounded-lg p-4 sm:p-6 w-full max-w-md max-h-[90vh] overflow-y-auto">
+            <h2 className="text-lg sm:text-xl font-bold mb-3 sm:mb-4">
               {editingTugas ? 'Edit Tugas' : 'Tambah Tugas Baru'}
             </h2>
             
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-3 sm:space-y-4">
               <div>
-                <label htmlFor="judul" className="block text-sm font-medium text-gray-700 mb-1">
+                <label htmlFor="judul" className="block text-xs sm:text-sm font-medium text-gray-700 mb-1">
                   Judul Tugas *
                 </label>
                 <Input
                   id="judul"
                   {...register('judul', { required: 'Judul wajib diisi' })}
                   placeholder="Masukkan judul tugas"
+                  className="text-sm"
                 />
                 {errors.judul && (
-                  <p className="text-red-500 text-sm mt-1">{errors.judul.message}</p>
+                  <p className="text-red-500 text-xs sm:text-sm mt-1">{errors.judul.message}</p>
                 )}
               </div>
 
               <div>
-                <label htmlFor="deskripsi" className="block text-sm font-medium text-gray-700 mb-1">
+                <label htmlFor="deskripsi" className="block text-xs sm:text-sm font-medium text-gray-700 mb-1">
                   Deskripsi
                 </label>
                 <textarea
                 id="deskripsi"
                 {...register('deskripsi')}
                 placeholder="Deskripsi tugas (opsional)"
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-black dark:border-gray-600 dark:text-white dark:placeholder-gray-400 font-small text-sm"
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-black dark:border-gray-600 dark:text-white dark:placeholder-gray-400 text-xs sm:text-sm"
                 rows={3}
                   />
               </div>
 
               <div>
-                <label htmlFor="kategoriId" className="block text-sm font-medium text-gray-700 mb-1">
+                <label htmlFor="kategoriId" className="block text-xs sm:text-sm font-medium text-gray-700 mb-1">
                   Kategori *
                 </label>
                 <select
                   id="kategoriId"
                   {...register('kategoriId', { required: 'Kategori wajib dipilih' })}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-black dark:border-gray-600 dark:text-gray-400 dark:placeholder-gray-400"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-black dark:border-gray-600 dark:text-gray-400 dark:placeholder-gray-400 text-xs sm:text-sm"
                 >
                   <option value="">Pilih kategori</option>
                   {kategoris.map((kategori) => (
@@ -435,18 +438,18 @@ export default function TugasPage() {
                   ))}
                 </select>
                 {errors.kategoriId && (
-                  <p className="text-red-500 text-sm mt-1">{errors.kategoriId.message}</p>
+                  <p className="text-red-500 text-xs sm:text-sm mt-1">{errors.kategoriId.message}</p>
                 )}
               </div>
 
               <div>
-                <label htmlFor="prioritas" className="block text-sm font-medium text-gray-700 mb-1">
+                <label htmlFor="prioritas" className="block text-xs sm:text-sm font-medium text-gray-700 mb-1">
                   Prioritas
                 </label>
                 <select
                   id="prioritas"
                   {...register('prioritas')}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-black dark:border-gray-600 dark:text-gray-400 dark:placeholder-gray-400"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-black dark:border-gray-600 dark:text-gray-400 dark:placeholder-gray-400 text-xs sm:text-sm"
                 >
                   <option value="LOW">Rendah</option>
                   <option value="MEDIUM">Sedang</option>
@@ -456,7 +459,7 @@ export default function TugasPage() {
               </div>
 
               <div>
-                <label htmlFor="estimasiWaktu" className="block text-sm font-medium text-gray-700 mb-1">
+                <label htmlFor="estimasiWaktu" className="block text-xs sm:text-sm font-medium text-gray-700 mb-1">
                   Estimasi Waktu (menit)
                 </label>
                 <Input
@@ -465,22 +468,24 @@ export default function TugasPage() {
                   {...register('estimasiWaktu')}
                   placeholder="Contoh: 60"
                   min="0"
+                  className="text-sm"
                 />
               </div>
 
               <div>
-                <label htmlFor="deadline" className="block text-sm font-medium text-gray-700 mb-1">
+                <label htmlFor="deadline" className="block text-xs sm:text-sm font-medium text-gray-700 mb-1">
                   Deadline
                 </label>
                 <Input
                   id="deadline"
                   type="datetime-local"
                   {...register('deadline')}
+                  className="text-sm"
                 />
               </div>
 
-              <div className="flex space-x-3 pt-4">
-                <Button type="submit" className="flex-1">
+              <div className="flex space-x-3 pt-3 sm:pt-4">
+                <Button type="submit" className="flex-1 text-sm">
                   {editingTugas ? 'Update' : 'Simpan'}
                 </Button>
                 <Button 
@@ -491,7 +496,7 @@ export default function TugasPage() {
                     setEditingTugas(null)
                     reset()
                   }}
-                  className="flex-1"
+                  className="flex-1 text-sm"
                 >
                   Batal
                 </Button>

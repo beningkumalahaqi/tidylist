@@ -149,10 +149,10 @@ export default function KategoriPage() {
       
       <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
         <div className="px-4 py-6 sm:px-0">
-          <div className="flex justify-between items-center mb-8">
+          <div className="flex justify-between items-center mb-6 sm:mb-8">
             <div>
-              <h1 className="text-3xl font-bold text-gray-900">Manajemen Kategori</h1>
-              <p className="mt-2 text-gray-600">Kelola kategori untuk mengorganisir tugas Anda</p>
+              <h1 className="text-xl sm:text-3xl font-bold text-gray-900">Manajemen Kategori</h1>
+              <p className="mt-1 sm:mt-2 text-sm sm:text-base text-gray-600">Kelola kategori untuk mengorganisir tugas Anda</p>
             </div>
             <Button 
               onClick={() => {
@@ -166,27 +166,27 @@ export default function KategoriPage() {
               className="flex items-center space-x-2"
             >
               <Plus className="h-4 w-4" />
-              <span>Tambah Kategori</span>
+              <span className="hidden sm:inline">Tambah Kategori</span>
             </Button>
           </div>
 
           {/* Categories Grid */}
           {kategoris.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
               {kategoris.map((kategori) => (
                 <Card key={kategori.id} className="hover:shadow-lg transition-shadow">
-                  <CardHeader className="pb-3">
+                  <CardHeader className="pb-2 sm:pb-3">
                     <div className="flex justify-between items-start">
-                      <div className="flex items-center space-x-3">
+                      <div className="flex items-center space-x-2 sm:space-x-3">
                         <div 
-                          className="w-10 h-10 rounded-lg flex items-center justify-center text-white text-lg font-bold"
+                          className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center text-white text-base sm:text-lg font-bold"
                           style={{ backgroundColor: kategori.warna }}
                         >
                           {kategori.icon}
                         </div>
                         <div>
-                          <CardTitle className="text-lg">{kategori.nama}</CardTitle>
-                          <CardDescription className="text-sm">
+                          <CardTitle className="text-base sm:text-lg">{kategori.nama}</CardTitle>
+                          <CardDescription className="text-xs sm:text-sm">
                             {kategori._count?.tugas || 0} tugas
                           </CardDescription>
                         </div>
@@ -196,40 +196,40 @@ export default function KategoriPage() {
                           onClick={() => openEditModal(kategori)}
                           className="p-1 hover:bg-gray-100 rounded"
                         >
-                          <Edit className="h-4 w-4 text-gray-500" />
+                          <Edit className="h-3 w-3 sm:h-4 sm:w-4 text-gray-500" />
                         </button>
                         <button
                           onClick={() => deleteKategori(kategori.id)}
                           className="p-1 hover:bg-gray-100 rounded"
                           disabled={kategori._count?.tugas > 0}
                         >
-                          <Trash2 className={`h-4 w-4 ${kategori._count?.tugas > 0 ? 'text-gray-300' : 'text-red-500'}`} />
+                          <Trash2 className={`h-3 w-3 sm:h-4 sm:w-4 ${kategori._count?.tugas > 0 ? 'text-gray-300' : 'text-red-500'}`} />
                         </button>
                       </div>
                     </div>
                   </CardHeader>
                   <CardContent>
-                    <div className="space-y-2">
-                      <div className="flex justify-between items-center text-sm">
+                    <div className="space-y-1 sm:space-y-2">
+                      <div className="flex justify-between items-center text-xs sm:text-sm">
                         <span className="text-gray-500">Warna</span>
                         <div className="flex items-center space-x-2">
                           <div 
-                            className="w-4 h-4 rounded-full border border-gray-200"
+                            className="w-3 h-3 sm:w-4 sm:h-4 rounded-full border border-gray-200"
                             style={{ backgroundColor: kategori.warna }}
                           ></div>
                           <span className="text-xs text-gray-600">{kategori.warna}</span>
                         </div>
                       </div>
                       
-                      <div className="flex justify-between items-center text-sm">
+                      <div className="flex justify-between items-center text-xs sm:text-sm">
                         <span className="text-gray-500">Icon</span>
-                        <span className="text-lg">{kategori.icon}</span>
+                        <span className="text-base sm:text-lg">{kategori.icon}</span>
                       </div>
                       
                       {kategori._count?.tugas > 0 && (
-                        <div className="mt-4 pt-4 border-t">
+                        <div className="mt-3 sm:mt-4 pt-3 sm:pt-4 border-t">
                           <div className="text-center">
-                            <p className="text-sm text-gray-600">
+                            <p className="text-xs sm:text-sm text-gray-600">
                               Kategori ini memiliki {kategori._count.tugas} tugas
                             </p>
                           </div>
@@ -242,18 +242,19 @@ export default function KategoriPage() {
             </div>
           ) : (
             <Card>
-              <CardContent className="py-12">
+              <CardContent className="py-8 sm:py-12">
                 <div className="text-center">
-                  <Tag className="h-12 w-12 text-gray-400 mx-auto mb-4" />
-                  <h3 className="text-lg font-medium text-gray-900 mb-2">
+                  <Tag className="h-10 w-10 sm:h-12 sm:w-12 text-gray-400 mx-auto mb-3 sm:mb-4" />
+                  <h3 className="text-base sm:text-lg font-medium text-gray-900 mb-2">
                     Belum Ada Kategori
                   </h3>
-                  <p className="text-gray-600 mb-4">
+                  <p className="text-sm sm:text-base text-gray-600 mb-3 sm:mb-4">
                     Mulai dengan membuat kategori untuk mengorganisir tugas Anda
                   </p>
-                  <Button onClick={() => setShowModal(true)}>
+                  <Button onClick={() => setShowModal(true)} className="text-sm">
                     <Plus className="h-4 w-4 mr-2" />
-                    Tambah Kategori
+                    <span className="hidden sm:inline">Tambah Kategori</span>
+                    <span className="sm:hidden">Tambah</span>
                   </Button>
                 </div>
               </CardContent>
@@ -264,38 +265,39 @@ export default function KategoriPage() {
 
       {/* Modal */}
       {showModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-          <div className="bg-white rounded-lg p-6 w-full max-w-md max-h-[90vh] overflow-y-auto">
-            <h2 className="text-xl font-bold mb-4">
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-2 sm:p-4 z-50">
+          <div className="bg-white rounded-lg p-4 sm:p-6 w-full max-w-md max-h-[90vh] overflow-y-auto">
+            <h2 className="text-lg sm:text-xl font-bold mb-3 sm:mb-4">
               {editingKategori ? 'Edit Kategori' : 'Tambah Kategori Baru'}
             </h2>
             
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-3 sm:space-y-4">
               <div>
-                <label htmlFor="nama" className="block text-sm font-medium text-gray-700 mb-1">
+                <label htmlFor="nama" className="block text-xs sm:text-sm font-medium text-gray-700 mb-1">
                   Nama Kategori *
                 </label>
                 <Input
                   id="nama"
                   {...register('nama', { required: 'Nama kategori wajib diisi' })}
                   placeholder="Masukkan nama kategori"
+                  className="text-sm"
                 />
                 {errors.nama && (
-                  <p className="text-red-500 text-sm mt-1">{errors.nama.message}</p>
+                  <p className="text-red-500 text-xs sm:text-sm mt-1">{errors.nama.message}</p>
                 )}
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-2">
                   Icon *
                 </label>
-                <div className="grid grid-cols-6 gap-2 mb-3">
+                <div className="grid grid-cols-6 gap-1 sm:gap-2 mb-2 sm:mb-3">
                   {defaultIcons.map((icon) => (
                     <button
                       key={icon}
                       type="button"
                       onClick={() => setValue('icon', icon)}
-                      className={`w-10 h-10 text-lg rounded border-2 hover:border-blue-300 ${
+                      className={`w-8 h-8 sm:w-10 sm:h-10 text-sm sm:text-lg rounded border-2 hover:border-blue-300 ${
                         selectedIcon === icon ? 'border-blue-500 bg-blue-50' : 'border-gray-200'
                       }`}
                     >
@@ -306,30 +308,30 @@ export default function KategoriPage() {
                 <Input
                   {...register('icon', { required: 'Icon wajib dipilih' })}
                   placeholder="Atau masukkan emoji sendiri"
-                  className="text-center"
+                  className="text-center text-sm"
                 />
                 {errors.icon && (
-                  <p className="text-red-500 text-sm mt-1">{errors.icon.message}</p>
+                  <p className="text-red-500 text-xs sm:text-sm mt-1">{errors.icon.message}</p>
                 )}
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-2">
                   Warna *
                 </label>
-                <div className="grid grid-cols-5 gap-2 mb-3">
+                <div className="grid grid-cols-5 gap-1 sm:gap-2 mb-2 sm:mb-3">
                   {defaultColors.map((color) => (
                     <button
                       key={color}
                       type="button"
                       onClick={() => setValue('warna', color)}
-                      className={`w-10 h-10 rounded border-2 hover:border-gray-400 ${
+                      className={`w-8 h-8 sm:w-10 sm:h-10 rounded border-2 hover:border-gray-400 ${
                         selectedColor === color ? 'border-gray-600' : 'border-gray-200'
                       }`}
                       style={{ backgroundColor: color }}
                     >
                       {selectedColor === color && (
-                        <span className="text-white">✓</span>
+                        <span className="text-white text-xs sm:text-sm">✓</span>
                       )}
                     </button>
                   ))}
@@ -337,36 +339,36 @@ export default function KategoriPage() {
                 <Input
                   type="color"
                   {...register('warna', { required: 'Warna wajib dipilih' })}
-                  className="h-10"
+                  className="h-8 sm:h-10"
                 />
                 {errors.warna && (
-                  <p className="text-red-500 text-sm mt-1">{errors.warna.message}</p>
+                  <p className="text-red-500 text-xs sm:text-sm mt-1">{errors.warna.message}</p>
                 )}
               </div>
 
               {/* Preview */}
-              <div className="border border-gray-200 rounded-lg p-4">
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+              <div className="border border-gray-200 rounded-lg p-3 sm:p-4">
+                <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-2">
                   Preview
                 </label>
-                <div className="flex items-center space-x-3">
+                <div className="flex items-center space-x-2 sm:space-x-3">
                   <div 
-                    className="w-10 h-10 rounded-lg flex items-center justify-center text-white text-lg font-bold"
+                    className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center text-white text-base sm:text-lg font-bold"
                     style={{ backgroundColor: selectedColor }}
                   >
                     {selectedIcon}
                   </div>
                   <div>
-                    <p className="font-medium">
+                    <p className="font-medium text-sm sm:text-base">
                       {watch('nama') || 'Nama Kategori'}
                     </p>
-                    <p className="text-sm text-gray-500">0 tugas</p>
+                    <p className="text-xs sm:text-sm text-gray-500">0 tugas</p>
                   </div>
                 </div>
               </div>
 
-              <div className="flex space-x-3 pt-4">
-                <Button type="submit" className="flex-1">
+              <div className="flex space-x-3 pt-3 sm:pt-4">
+                <Button type="submit" className="flex-1 text-sm">
                   {editingKategori ? 'Update' : 'Simpan'}
                 </Button>
                 <Button 
@@ -377,7 +379,7 @@ export default function KategoriPage() {
                     setEditingKategori(null)
                     reset()
                   }}
-                  className="flex-1"
+                  className="flex-1 text-sm"
                 >
                   Batal
                 </Button>
