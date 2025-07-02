@@ -17,6 +17,7 @@ TidyList adalah aplikasi to-do list berbasis web yang berfokus pada **manajemen 
 |---------------------|--------------------------------------------------------------------------|
 | ✅ To-Do List        | Tambah, ubah, hapus, dan kategorikan tugas harian                        |
 | 📊 Visualisasi Waktu| Pie/bar chart mingguan penggunaan waktu berdasarkan kategori             |
+| 🤖 TidyBot AI       | Asisten AI untuk insight, saran jadwal, analisis produktivitas           |
 | 🔔 Reminder         | Pengingat tugas                                               |
 | 📅 Riwayat          | Lihat dan lacak tugas yang telah diselesaikan                            |
 | 🎨 Kustomisasi      | Dark mode, kategori fleksibel, urutan tugas bisa diubah                  |
@@ -65,6 +66,7 @@ Buat file `.env` dan isi seperti berikut:
 ```env
 DATABASE_URL="postgresql://user:password@localhost:5432/tidylist"
 NEXTAUTH_SECRET="yoursecret"
+GEMINI_API_KEY="your-gemini-api-key-here"
 ```
 
 ### 4. Setup Prisma dan database
@@ -107,6 +109,37 @@ Akses aplikasi di `http://localhost:3000`
 * `/login` – Autentikasi pengguna
 * `/kategori` – Pengelolaan kategori
 * `/history` – Riwayat tugas
+
+## 🤖 TidyBot - AI Assistant
+
+TidyBot adalah asisten AI yang terintegrasi dengan Google Gemini AI untuk membantu pengguna mengelola tugas dengan lebih efektif.
+
+### Fitur TidyBot:
+
+#### 📊 **Fitur AI Utama**
+- **Insight Mingguan**: Analisis performa tugas dan pola produktivitas
+- **Saran Jadwal**: Optimalisasi penjadwalan berdasarkan prioritas dan deadline
+- **Analisis Keseimbangan**: Evaluasi distribusi waktu antar kategori tugas
+- **Tips Produktivitas**: Rekomendasi personal untuk meningkatkan efisiensi
+
+#### 🧠 **Fitur AI Lanjutan**
+- **Prioritas Cerdas**: AI menganalisis dan menyarankan prioritas optimal berdasarkan deadline, kompleksitas, dan dampak
+- **Prediksi Waktu**: Estimasi waktu pengerjaan yang akurat berdasarkan riwayat dan kompleksitas tugas
+- **Deteksi Burnout**: Identifikasi tanda-tanda kelelahan dan saran untuk menjaga keseimbangan
+- **Optimasi Energi**: Rekomendasi penjadwalan berdasarkan pola energi dan performa harian
+- **Pembentukan Kebiasaan**: Panduan untuk membentuk kebiasaan produktif berkelanjutan
+
+#### 💬 **Chat Interface**
+- Chat interaktif dengan TidyBot
+- Pertanyaan cepat untuk produktivitas
+- Respon contextual berdasarkan data tugas pengguna
+- Dashboard insight AI real-time
+
+### Setup TidyBot:
+
+1. Dapatkan API key dari [Google AI Studio](https://aistudio.google.com/)
+2. Tambahkan `GEMINI_API_KEY` ke file `.env`
+3. TidyBot akan otomatis menganalisis data tugas Anda untuk memberikan insight yang personal
 
 ## 🤝 Kontributor
 

@@ -12,7 +12,8 @@ import {
   LogOut,
   User,
   Menu,
-  X
+  X,
+  Bot
 } from 'lucide-react'
 
 export default function Navigation() {
@@ -35,6 +36,11 @@ export default function Navigation() {
       name: 'Kategori',
       href: '/kategori',
       icon: Tag,
+    },
+    {
+      name: 'TidyBot',
+      href: '/tidybot',
+      icon: Bot,
     },
     {
       name: 'Riwayat',
