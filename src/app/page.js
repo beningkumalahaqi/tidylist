@@ -44,9 +44,6 @@ export default function HomePage() {
       const startOfDay = new Date(today.setHours(0, 0, 0, 0))
       const endOfDay = new Date(today.setHours(23, 59, 59, 999))
       
-      // Fetch dashboard data
-      const dashboardResponse = await fetch('/api/dashboard')
-      const dashboardData = await dashboardResponse.json()
       
       // Fetch today's tasks
       const tasksResponse = await fetch('/api/tugas')
