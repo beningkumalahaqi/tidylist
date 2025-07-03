@@ -24,25 +24,7 @@ TidyList adalah aplikasi to-do list berbasis web yang berfokus pada **manajemen 
 | ☁️ Cloud Sync       | Akses data dari berbagai perangkat (akun login)                          |
 | 🔐 Akun Pribadi     | Data pengguna tersimpan aman dan terisolasi dengan login                 |
 
-## 📂 Struktur Proyek
 
-```
-
-tidylist/
-├── prisma/                # Prisma schema dan migration
-│   └── schema.prisma
-├── public/                # Static assets (favicon, dll)
-├── src/
-│   ├── app/               # API routes & halaman frontend
-│   ├── components/        # Reusable UI components
-│   ├── lib/               # Prisma client, helper functions
-│   ├── styles/            # CSS & Tailwind
-│   └── types/             # TypeScript interfaces
-├── .env                   # Konfigurasi
-├── README.md              # Dokumentasi
-└── package.json
-
-````
 
 ## 🧪 Cara Menjalankan Secara Lokal
 
