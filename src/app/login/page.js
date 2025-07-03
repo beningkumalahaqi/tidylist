@@ -51,7 +51,7 @@ export default function LoginPage() {
           toast.error('Email atau password salah')
         } else {
           toast.success('Login berhasil!')
-          router.push('/dashboard')
+          router.push('/')
         }
       }
     } catch (error) {
