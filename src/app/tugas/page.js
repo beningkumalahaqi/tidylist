@@ -32,6 +32,8 @@ export default function TugasPage() {
   const [showModal, setShowModal] = useState(false)
   const [editingTugas, setEditingTugas] = useState(null)
   const [filterStatus, setFilterStatus] = useState('all')
+  const [showCompletionModal, setShowCompletionModal] = useState(false)
+  const [completingTask, setCompletingTask] = useState(null)
   
   const { register, handleSubmit, formState: { errors }, reset, setValue, control } = useForm()
 
@@ -149,6 +151,28 @@ export default function TugasPage() {
     setValue('estimasiWaktu', tugasItem.estimasiWaktu || '')
     setValue('deadline', tugasItem.deadline ? tugasItem.deadline : '')
     setShowModal(true)
+  }
+
+  const openCompletionModal = (task) => {
+    setCompletingTask(task)
+    setValue('waktuSelesai', task.estimasiWaktu || '')
+    setShowCompletionModal(true)
+  }
+
+  const handleCompleteTask = (task) => {
+    const waktu = prompt('Berapa menit waktu yang dihabiskan?', task.estimasiWaktu || '')
+    if (waktu && !isNaN(waktu)) {
+      updateTugasStatus(task.id, 'COMPLETED', parseInt(waktu))
+      setCompletingTask(null)
+    }
+  }
+
+  const handleTaskCompletion = (data) => {
+    if (completingTask) {
+      updateTugasStatus(completingTask.id, 'COMPLETED', parseInt(data.waktuSelesai))
+      setShowCompletionModal(false)
+      setCompletingTask(null)
+    }
   }
 
   const filteredTugas = tugas.filter(task => {
@@ -340,12 +364,7 @@ export default function TugasPage() {
                           <Button
                             size="sm"
                             variant="outline"
-                            onClick={() => {
-                              const waktu = prompt('Berapa menit waktu yang dihabiskan?', task.estimasiWaktu || '')
-                              if (waktu && !isNaN(waktu)) {
-                                updateTugasStatus(task.id, 'COMPLETED', parseInt(waktu))
-                              }
-                            }}
+                            onClick={() => openCompletionModal(task)}
                             className="flex-1 text-xs sm:text-sm"
                           >
                             <CheckCircle className="h-3 w-3 mr-1" />
@@ -503,6 +522,56 @@ export default function TugasPage() {
                     setShowModal(false)
                     setEditingTugas(null)
                     reset()
+                  }}
+                  className="flex-1 text-sm"
+                >
+                  Batal
+                </Button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* Task Completion Modal */}
+      {showCompletionModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-2 sm:p-4 z-30">
+          <div className="bg-white rounded-lg p-4 sm:p-6 w-full max-w-md">
+            <h2 className="text-lg sm:text-xl font-bold mb-3 sm:mb-4 dark:text-black">
+              Selesaikan Tugas
+            </h2>
+            
+            <form onSubmit={handleSubmit(handleTaskCompletion)} className="space-y-3 sm:space-y-4">
+              <div>
+                <label htmlFor="waktuSelesai" className="block text-xs sm:text-sm font-medium text-gray-700 mb-1">
+                  Berapa menit waktu yang dihabiskan?
+                </label>
+                <Input
+                  id="waktuSelesai"
+                  type="number"
+                  {...register('waktuSelesai', { 
+                    required: 'Waktu wajib diisi',
+                    min: { value: 1, message: 'Waktu minimal 1 menit' }
+                  })}
+                  placeholder="Contoh: 60"
+                  min="1"
+                  className="text-sm"
+                />
+                {errors.waktuSelesai && (
+                  <p className="text-red-500 text-xs sm:text-sm mt-1">{errors.waktuSelesai.message}</p>
+                )}
+              </div>
+
+              <div className="flex space-x-3 pt-3 sm:pt-4">
+                <Button type="submit" className="flex-1 text-sm">
+                  Selesaikan
+                </Button>
+                <Button 
+                  type="button" 
+                  variant="outline" 
+                  onClick={() => {
+                    setShowCompletionModal(false)
+                    setCompletingTask(null)
                   }}
                   className="flex-1 text-sm"
                 >
