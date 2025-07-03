@@ -159,14 +159,6 @@ export default function TugasPage() {
     setShowCompletionModal(true)
   }
 
-  const handleCompleteTask = (task) => {
-    const waktu = prompt('Berapa menit waktu yang dihabiskan?', task.estimasiWaktu || '')
-    if (waktu && !isNaN(waktu)) {
-      updateTugasStatus(task.id, 'COMPLETED', parseInt(waktu))
-      setCompletingTask(null)
-    }
-  }
-
   const handleTaskCompletion = (data) => {
     if (completingTask) {
       updateTugasStatus(completingTask.id, 'COMPLETED', parseInt(data.waktuSelesai))
