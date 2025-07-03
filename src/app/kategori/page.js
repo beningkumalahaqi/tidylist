@@ -149,8 +149,8 @@ export default function KategoriPage() {
       
       <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
         <div className="px-4 py-6 sm:px-0">
-          <div className="flex justify-between items-center mb-6 sm:mb-8">
-            <div>
+          <div className="flex items-center justify-between mb-6 sm:mb-8">
+            <div className="flex-1 pr-4">
               <h1 className="text-xl sm:text-3xl font-bold text-gray-900">Manajemen Kategori</h1>
               <p className="mt-1 sm:mt-2 text-sm sm:text-base text-gray-600">Kelola kategori untuk mengorganisir tugas Anda</p>
             </div>
@@ -163,7 +163,7 @@ export default function KategoriPage() {
                 })
                 setShowModal(true)
               }}
-              className="flex items-center space-x-2"
+              className="flex items-center justify-center space-x-2 h-10 sm:h-auto px-3 sm:px-4 flex-shrink-0 pr-1"
               aria-label="Tambah Kategori"
             >
               <Plus className="h-4 w-4" />
