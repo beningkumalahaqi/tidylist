@@ -6,7 +6,7 @@ TidyList adalah aplikasi to-do list berbasis web yang berfokus pada **manajemen 
 
 - **Frontend & Backend**: [Next.js](https://nextjs.org/)
 - **Database ORM**: [Prisma](https://www.prisma.io/)
-- **Database**: PostgreSQL
+- **Database**: PostgreSQL([CockroachDB](https://www.cockroachlabs.com/))
 - **Authentication**: NextAuth.js (Email Login)
 - **Charting**: Chart.js (untuk visualisasi data waktu)
 - **Deployment**: Vercel
